@@ -242,14 +242,19 @@ void GraphicsDevice::OutputBuffer(uint8_t *buffer)
   for (uint32_t pointer = 383999; pointer > 0; pointer--) 
   {
     PIN_LOW(WR_PORT, WR_PIN);
-    PIN_LOW(WR_PORT, WR_PIN);
-    PIN_HIGH(WR_PORT, WR_PIN);
+    //PIN_LOW(WR_PORT, WR_PIN);
+    
 
     if(index != buffer[pointer - 1])
     {
       index = buffer[pointer - 1];
       color = pallete.palleteList[index];
+      PIN_HIGH(WR_PORT, WR_PIN);
       WriteFast16(color);
+    }
+    else
+    {
+      PIN_HIGH(WR_PORT, WR_PIN);
     }
   }
   CS_IDLE;

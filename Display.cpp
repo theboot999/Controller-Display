@@ -406,7 +406,6 @@ void Display::DrawQuad(Quad& quad)
   float rightX = vList[0]->screenX;
   float toAddLeft = GET_DELTAS(0, vLeft);
   float toAddRight = GET_DELTAS(0, vRight);
-  DrawPixel(leftX, rightX, color);
 
   //if right on same plane
   if(vList[0]->screenY == vList[1]->screenY)
@@ -426,7 +425,7 @@ void Display::DrawQuad(Quad& quad)
 
   while(1)
   {
-    DrawHLineF(leftX, y, rightX, color);
+    DrawHLineF(leftX, y, rightX + 1, color);
     y++;
 
     if(y > bottomY){ break; } //weve hit bottom

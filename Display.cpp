@@ -442,7 +442,8 @@ void Display::DrawQuad(Quad& quad)
         toAddLeft = GET_DELTAS(vLeft + 1, vLeft);
       }
     }
-    else if(y >= vList[vRight]->screenY)  //hit next right side vertice
+    
+	  if(y >= vList[vRight]->screenY)  //hit next right side vertice
     {
       vRight++;
       Serial.println(vRight);

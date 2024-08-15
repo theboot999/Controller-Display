@@ -443,7 +443,7 @@ void Display::DrawQuad(Quad& quad)
       }
     }
     
-	  if(y >= vList[vRight]->screenY)  //hit next right side vertice
+    if(y >= vList[vRight]->screenY)  //hit next right side vertice
     {
       vRight++;
       Serial.println(vRight);

@@ -2,9 +2,6 @@
 
 #include "Display.h"
 #include "Glyphs.h"
-//Issue x axis is mirrored
-
-
 
 void Display::Init(UiInput *uiInput)
 {

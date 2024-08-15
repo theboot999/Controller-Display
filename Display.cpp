@@ -405,8 +405,6 @@ void Display::DrawQuad(Quad& quad)
   int16_t vLeft = 3;
   int16_t vRight = 1;
 
-
-  //currently missing the first pixel?
   float leftX = vList[0]->screenX;
   float rightX = vList[0]->screenX;
   float toAddLeft = GET_DELTAS(0, vLeft);
@@ -416,7 +414,6 @@ void Display::DrawQuad(Quad& quad)
   //if right on same plane
   if(vList[0]->screenY == vList[1]->screenY)
   {
-    Serial.println("a");
     rightX = vList[1]->screenX;
     vRight = 2;
     toAddRight = GET_DELTAS(vRight - 1, vRight);
@@ -425,16 +422,10 @@ void Display::DrawQuad(Quad& quad)
   //left on same plane
   if(vList[0]->screenY == vList[3]->screenY)
   {
-    Serial.println("B");
     leftX = vList[3]->screenX;
     vLeft = 2;
     toAddLeft = GET_DELTAS(vLeft + 1, vLeft);
   }
-
-
-
-
-  
 
   while(1)
   {
@@ -449,7 +440,7 @@ void Display::DrawQuad(Quad& quad)
     if(y >= vList[vLeft]->screenY)  //hit next left side vertice
     {
       vLeft--;
-      if(vLeft > -1) //may need to change this to zero
+      if(vLeft > -1)
       {
         toAddLeft = GET_DELTAS(vLeft + 1, vLeft);
       }
@@ -458,12 +449,11 @@ void Display::DrawQuad(Quad& quad)
     {
       vRight++;
       Serial.println(vRight);
-      if(vRight < 4) //may need to change this to < 2
+      if(vRight < 4)
       {
         toAddRight = GET_DELTAS(vRight - 1, vRight);
       }
     }
-
   }
 }
 
@@ -546,8 +536,6 @@ void Display::DrawTriangleFill(int32_t x0, int32_t y0, int32_t x1, int32_t y1, i
     }
 }
 
-
-//CIRCLES DONT HAVE CLIPPING
 void Display::DrawCircle(int16_t xc, int16_t yc, int16_t inner, int16_t outer, uint8_t color, int8_t quadrant)
 {
   int16_t xo = outer;
@@ -629,6 +617,8 @@ void Display::DrawCircle(int16_t xc, int16_t yc, int16_t inner, int16_t outer, u
   }
 }
 
+//TODO: Update clipping to be per character. Not per pixe
+//Calculate character size at start them clip
 int16_t Display::DrawChar(int16_t x, int16_t y, char c, int8_t font, uint8_t color, bool isCenterWidth, bool isCenterHeight)
 {
   if(isCenterWidth) { x -= GetHalfCharWidth(c, font); }
